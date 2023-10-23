@@ -27,8 +27,7 @@ RUN \
         /var/tmp/*
 
 ENTRYPOINT ["/usr/bin/tini", "--", "/usr/bin/python3"]
-#CMD ["/app/exporter.py"]
-CMD ["/app/exporter.py", "9101", "http://localhost:9101/metrics" ]
+CMD ["/app/exporter.py"]
 
 LABEL \
     org.opencontainers.image.title="intel-gpu-exporter" \
