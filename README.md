@@ -12,7 +12,7 @@ Run container:
 docker run -d \
   --device /dev/dri:/dev/dri \
   --privileged \
-  --publish 9105:9100 \
+  --publish 9100:9100 \
   --restart always \
   --name intel-gpu-exporter \
   andrewgolikov55/intel-gpu-exporter
@@ -28,7 +28,7 @@ services:
             - '/dev/dri:/dev/dri'
         privileged: true
         ports:
-            - '9105:9100'
+            - '9100:9100'
         restart: always
         container_name: intel-gpu-exporter
         image: andrewgolikov55/intel-gpu-exporter
