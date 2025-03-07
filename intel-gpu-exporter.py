@@ -90,12 +90,19 @@ def update(data):
     gpu_power_package.set(data.get("power", {}).get("Package", 0))
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+                prog='intel-gpu-exporter',
+                description='Export Intel GPU metrics to prometheus')
+    parser.add_argument('-p', '--port', type=int, default=9100)
+    parser.add_argument('-b', '--binary', default='intel_gpu_top')
+    args = parser.parse_args()
+
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s") 
     
-    start_http_server(8080)
+    start_http_server(args.port)
     
     period = int(os.getenv("REFRESH_PERIOD_MS", 10000))
-    cmd = f"intel_gpu_top -J -s {period}"
+    cmd = f"{args.binary} -J -s {period}"
     
     process = subprocess.Popen(
         cmd.split(),
