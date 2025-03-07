@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from prometheus_client import start_http_server, Gauge
 import argparse
 import os
