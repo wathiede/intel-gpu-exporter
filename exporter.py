@@ -1,4 +1,5 @@
 from prometheus_client import start_http_server, Gauge
+import argparse
 import os
 import sys
 import subprocess
@@ -72,16 +73,22 @@ def update(data):
     igpu_rc6.set(data.get("rc6", {}).get("value", 0))
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+                    prog='intel-gpu-exporter',
+                    description='Export Intel GPU metrics to prometheus')
+    parser.add_argument('-p', '--port', default=9100)
+    args = parser.parse_args()
+
     # Настройка логирования
     logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
     
     # Запуск HTTP сервера
-    start_http_server(9100)
+    start_http_server(args.port)
 
     # Получение и обработка данных с использованием intel_gpu_top
     period = os.getenv("REFRESH_PERIOD_MS", 5000)
 
-    cmd = '/usr/bin/intel_gpu_top -J -s {}'.format(int(period))
+    cmd = 'intel_gpu_top -J -s {}'.format(int(period))
     process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     # Логирование начала процесса
