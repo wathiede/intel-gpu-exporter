@@ -5,5 +5,5 @@ setup(name='intel-gpu-exporter',
       # Modules to import from other scripts:
       packages=find_packages(),
       # Executables
-      scripts=["exporter.py"],
+      scripts=["intel-gpu-exporter.py"],
      )
