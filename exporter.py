@@ -78,6 +78,7 @@ if __name__ == '__main__':
                     prog='intel-gpu-exporter',
                     description='Export Intel GPU metrics to prometheus')
     parser.add_argument('-p', '--port', type=int, default=9100)
+    parser.add_argument('-b', '--binary', default='intel_gpu_top')
     args = parser.parse_args()
 
     # Настройка логирования
@@ -89,7 +90,7 @@ if __name__ == '__main__':
     # Получение и обработка данных с использованием intel_gpu_top
     period = os.getenv("REFRESH_PERIOD_MS", 5000)
 
-    cmd = 'intel_gpu_top -J -s {}'.format(int(period))
+    cmd = '{} -J -s {}'.format(args.binary, int(period))
     process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     # Логирование начала процесса
