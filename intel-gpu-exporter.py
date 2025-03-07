@@ -38,6 +38,8 @@ gpu_engines_compute_busy = Gauge("igpu_engines_compute_0_busy", "Compute busy ut
 gpu_engines_compute_sema = Gauge("igpu_engines_compute_0_sema", "Compute sema utilisation %")
 gpu_engines_compute_wait = Gauge("igpu_engines_compute_0_wait", "Compute wait utilisation %")
 
+gpu_engines = Gauge("igpu_engines", "Engine busy/sema/wait status", ['name', 'measure'])
+
 gpu_power_gpu = Gauge("igpu_power_gpu", "GPU power W")
 gpu_power_package = Gauge("igpu_power_package", "Package power W")
 
@@ -48,6 +50,12 @@ def update(data):
 
     period_data = data.get("period", {})
     gpu_period.set(period_data.get("duration", 0))
+    
+    for (name, stats) in data.get('engines', {}).items():
+        for (measure, value) in stats.items():
+            if measure == 'unit':
+                continue
+            gpu_engines.labels(name, measure).set(value)
 
     freq = data.get("frequency", {})
     gpu_frequency_actual.set(freq.get("actual", 0))
