@@ -6,40 +6,40 @@ import subprocess
 import json
 import logging
 
-gpu_period = Gauge("gpu_period", "Period ms")
+gpu_period = Gauge("igpu_period", "Period ms")
 
-gpu_frequency_actual = Gauge("gpu_frequency_actual", "Frequency actual MHz")
-gpu_frequency_requested = Gauge("gpu_frequency_requested", "Frequency requested MHz")
+gpu_frequency_actual = Gauge("igpu_frequency_actual", "Frequency actual MHz")
+gpu_frequency_requested = Gauge("igpu_frequency_requested", "Frequency requested MHz")
 
-gpu_interrupts = Gauge("gpu_interrupts", "Interrupts/s")
+gpu_interrupts = Gauge("igpu_interrupts", "Interrupts/s")
 
-gpu_rc6 = Gauge("gpu_rc6", "RC6 %")
+gpu_rc6 = Gauge("igpu_rc6", "RC6 %")
 
-gpu_imc_bandwidth_reads = Gauge("gpu_imc_bandwidth_reads", "IMC reads MiB/s")
-gpu_imc_bandwidth_writes = Gauge("gpu_imc_bandwidth_writes", "IMC writes MiB/s")
+gpu_imc_bandwidth_reads = Gauge("igpu_imc_bandwidth_reads", "IMC reads MiB/s")
+gpu_imc_bandwidth_writes = Gauge("igpu_imc_bandwidth_writes", "IMC writes MiB/s")
 
-gpu_engines_render_3d_busy = Gauge("gpu_engines_render_3d_busy", "Render 3D 0 busy utilisation %")
-gpu_engines_render_3d_sema = Gauge("gpu_engines_render_3d_sema", "Render 3D 0 sema utilisation %")
-gpu_engines_render_3d_wait = Gauge("gpu_engines_render_3d_wait", "Render 3D 0 wait utilisation %")
+gpu_engines_render_3d_busy = Gauge("igpu_engines_render_3d_busy", "Render 3D 0 busy utilisation %")
+gpu_engines_render_3d_sema = Gauge("igpu_engines_render_3d_sema", "Render 3D 0 sema utilisation %")
+gpu_engines_render_3d_wait = Gauge("igpu_engines_render_3d_wait", "Render 3D 0 wait utilisation %")
 
-gpu_engines_blitter_busy = Gauge("gpu_engines_blitter_busy", "Blitter 0 busy utilisation %")
-gpu_engines_blitter_sema = Gauge("gpu_engines_blitter_sema", "Blitter 0 sema utilisation %")
-gpu_engines_blitter_wait = Gauge("gpu_engines_blitter_wait", "Blitter 0 wait utilisation %")
+gpu_engines_blitter_busy = Gauge("igpu_engines_blitter_busy", "Blitter 0 busy utilisation %")
+gpu_engines_blitter_sema = Gauge("igpu_engines_blitter_sema", "Blitter 0 sema utilisation %")
+gpu_engines_blitter_wait = Gauge("igpu_engines_blitter_wait", "Blitter 0 wait utilisation %")
 
-gpu_engines_video_enhance_busy = Gauge("gpu_engines_video_enhance_busy", "Video Enhance 0 busy utilisation %")
-gpu_engines_video_enhance_sema = Gauge("gpu_engines_video_enhance_sema", "Video Enhance 0 sema utilisation %")
-gpu_engines_video_enhance_wait = Gauge("gpu_engines_video_enhance_wait", "Video Enhance 0 wait utilisation %")
+gpu_engines_video_enhance_busy = Gauge("igpu_engines_video_enhance_busy", "Video Enhance 0 busy utilisation %")
+gpu_engines_video_enhance_sema = Gauge("igpu_engines_video_enhance_sema", "Video Enhance 0 sema utilisation %")
+gpu_engines_video_enhance_wait = Gauge("igpu_engines_video_enhance_wait", "Video Enhance 0 wait utilisation %")
 
-gpu_engines_video_busy = Gauge("gpu_engines_video_busy", "Video 0 busy utilisation %")
-gpu_engines_video_sema = Gauge("gpu_engines_video_sema", "Video 0 sema utilisation %")
-gpu_engines_video_wait = Gauge("gpu_engines_video_wait", "Video 0 wait utilisation %")
+gpu_engines_video_busy = Gauge("igpu_engines_video_busy", "Video 0 busy utilisation %")
+gpu_engines_video_sema = Gauge("igpu_engines_video_sema", "Video 0 sema utilisation %")
+gpu_engines_video_wait = Gauge("igpu_engines_video_wait", "Video 0 wait utilisation %")
 
-gpu_engines_compute_busy = Gauge("gpu_engines_compute_busy", "Compute busy utilisation %")
-gpu_engines_compute_sema = Gauge("gpu_engines_compute_sema", "Compute sema utilisation %")
-gpu_engines_compute_wait = Gauge("gpu_engines_compute_wait", "Compute wait utilisation %")
+gpu_engines_compute_busy = Gauge("igpu_engines_compute_busy", "Compute busy utilisation %")
+gpu_engines_compute_sema = Gauge("igpu_engines_compute_sema", "Compute sema utilisation %")
+gpu_engines_compute_wait = Gauge("igpu_engines_compute_wait", "Compute wait utilisation %")
 
-gpu_power_gpu = Gauge("gpu_power_gpu", "GPU power W")
-gpu_power_package = Gauge("gpu_power_package", "Package power W")
+gpu_power_gpu = Gauge("igpu_power_gpu", "GPU power W")
+gpu_power_package = Gauge("igpu_power_package", "Package power W")
 
 def update(data):
     def get_engine(name):
