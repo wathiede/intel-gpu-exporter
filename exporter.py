@@ -77,7 +77,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
                     prog='intel-gpu-exporter',
                     description='Export Intel GPU metrics to prometheus')
-    parser.add_argument('-p', '--port', default=9100)
+    parser.add_argument('-p', '--port', type=int, default=9100)
     args = parser.parse_args()
 
     # Настройка логирования
